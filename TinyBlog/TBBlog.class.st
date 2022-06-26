@@ -4,25 +4,35 @@ Class {
 	#instVars : [
 		'posts'
 	],
-	#classInstVars : [
-		'uniqueInstance'
-	],
 	#category : #TinyBlog
 }
 
-{ #category : #initialization }
+{ #category : #accessing }
 TBBlog class >> current [
-	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
+	^ self selectAll
+		ifNotEmpty: [ :x | x anyOne ]
+		ifEmpty: [ self new save ]
 ]
 
-{ #category : #initialization }
+{ #category : #'class initialization' }
 TBBlog class >> initialize [
 	self reset
 ]
 
 { #category : #initialization }
+TBBlog class >> initializeVoyageOnMemoryDB [
+	VOMemoryRepository new enableSingleton
+]
+
+{ #category : #testing }
+TBBlog class >> isVoyageRoot [
+	^ true
+
+]
+
+{ #category : #initialization }
 TBBlog class >> reset [
-	uniqueInstance := nil
+	self initializeVoyageOnMemoryDB
 ]
 
 { #category : #collection }
@@ -58,9 +68,11 @@ TBBlog >> initialize [
 	posts := OrderedCollection new
 ]
 
-{ #category : #removing }
+{ #category : #writing }
 TBBlog >> removeAllPosts [
-	posts := OrderedCollection new
+	posts do: [ :each | each remove ].
+	posts := OrderedCollection new.
+	self save.
 ]
 
 { #category : #removing }
@@ -68,7 +80,10 @@ TBBlog >> size [
 	^ posts size
 ]
 
-{ #category : #removing }
+{ #category : #writing }
 TBBlog >> writeBlogPost: aPost [
-	posts add: aPost
+	posts add: aPost.
+	aPost save.
+	self save
+
 ]
