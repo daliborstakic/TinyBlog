@@ -9,27 +9,26 @@ Class {
 
 { #category : #'class initialization' }
 TBApplicationRootComponent class >> canBeRoot [
-	^ true
+^ true
 
 
 ]
 
 { #category : #'class initialization' }
 TBApplicationRootComponent class >> initialize [
-	"self initialize"
-	| app |
-	app := WAAdmin register: self asApplicationAt: 'TinyBlog'.
-	app
-		addLibrary: JQDeploymentLibrary;
-		addLibrary: JQUiDeploymentLibrary;
-		addLibrary: TBSDeploymentLibrary
+"self initialize"
+| app |
+app := WAAdmin register: self asApplicationAt: 'TinyBlog'.
+app
+addLibrary: JQDeploymentLibrary;
+addLibrary: JQUiDeploymentLibrary;
+addLibrary: TBSDeploymentLibrary
 
 ]
 
 { #category : #initialization }
 TBApplicationRootComponent >> children [
 ^ { main }
-
 
 ]
 
@@ -42,6 +41,7 @@ main := TBPostsListComponent new
 { #category : #initialization }
 TBApplicationRootComponent >> main: aComponent [
 main := aComponent
+
 ]
 
 { #category : #initialization }
@@ -52,7 +52,7 @@ html render: main
 
 { #category : #updating }
 TBApplicationRootComponent >> updateRoot: anHtmlRoot [
-	super updateRoot: anHtmlRoot.
-	anHtmlRoot beHtml5.
-	anHtmlRoot title: 'TinyBlog'
+super updateRoot: anHtmlRoot.
+anHtmlRoot beHtml5.
+anHtmlRoot title: 'TinyBlog'
 ]

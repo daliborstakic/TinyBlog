@@ -19,17 +19,17 @@ super initialize.
 post := TBPost new
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 TBPostComponent >> post: aPost [
 post := aPost
+
 ]
 
-{ #category : #rendering }
+{ #category : #initialization }
 TBPostComponent >> renderContentOn: html [
 html heading level: 2; with: self title.
 html heading level: 6; with: self date.
 html text: self text
-
 ]
 
 { #category : #initialization }

@@ -18,7 +18,6 @@ session to return the blog of the currently logged in user."
 { #category : #initialization }
 TBScreenComponent >> children [
 ^ { header }
-
 ]
 
 { #category : #initialization }
@@ -33,8 +32,18 @@ header := self createHeaderComponent
 ]
 
 { #category : #initialization }
+TBScreenComponent >> renderBrandOn: html [
+html tbsNavbarHeader: [
+html tbsNavbarBrand
+url: self application url;
+with: 'TinyBlog' ]
+
+]
+
+{ #category : #initialization }
 TBScreenComponent >> renderContentOn: html [
-html render: header
-
-
+html tbsNavbar beDefault; with: [
+html tbsContainer: [
+self renderBrandOn: html
+]]
 ]

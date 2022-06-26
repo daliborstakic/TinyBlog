@@ -63,7 +63,8 @@ TBBlog class >> isVoyageRoot [
 
 { #category : #initialization }
 TBBlog class >> reset [
-	self initializeVoyageOnMemoryDB
+self initializeVoyageOnMemoryDB
+
 ]
 
 { #category : #collection }
