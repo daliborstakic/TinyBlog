@@ -135,6 +135,13 @@ TBBlog >> removeAllPosts [
 ]
 
 { #category : #removing }
+TBBlog >> removeBlogPost: aPost [
+posts remove: aPost ifAbsent: [ ].
+self save.
+
+]
+
+{ #category : #removing }
 TBBlog >> size [
 	^ posts size
 ]
